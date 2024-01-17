@@ -19,7 +19,17 @@
 <body>
     <div id="timerDisplay">0 minutes without a dad joke</div>
     <script>
-        let startTime = new Date();
+        let startTime;
+
+        // Retrieve start time from localStorage
+        const storedStartTime = localStorage.getItem('startTime');
+        if (storedStartTime) {
+            startTime = new Date(storedStartTime);
+        } else {
+            startTime = new Date();
+            // Save start time to localStorage
+            localStorage.setItem('startTime', startTime.toISOString());
+        }
 
         function updateTimer() {
             const currentTime = new Date();
@@ -29,6 +39,8 @@
 
         function resetTimer() {
             startTime = new Date();
+            // Save new start time to localStorage
+            localStorage.setItem('startTime', startTime.toISOString());
             updateTimer();
         }
 
