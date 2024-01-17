@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            font-size: 3em;
+        }
+    </style>
+    <title>Minute Timer</title>
+</head>
+<body>
+    <div id="timerDisplay">0 minutes without a dad joke</div>
+    <script>
+        let startTime = new Date();
+
+        function updateTimer() {
+            const currentTime = new Date();
+            const elapsedTime = Math.floor((currentTime - startTime) / (1000 * 60));
+            document.getElementById('timerDisplay').textContent = `${elapsedTime} minutes without a dad joke`;
+        }
+
+        function resetTimer() {
+            startTime = new Date();
+            updateTimer();
+        }
+
+        function handleKeyPress(event) {
+            if (event.key === ' ') {
+                resetTimer();
+            }
+        }
+
+        setInterval(updateTimer, 1000 * 60); // Update every minute
+        document.addEventListener('keypress', handleKeyPress);
+    </script>
+</body>
+</html>
